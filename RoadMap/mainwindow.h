@@ -47,6 +47,7 @@ namespace RoadMap {
         System::Windows::Forms::LinkLabel^ sourceCode_btn;
         System::Windows::Forms::LinkLabel^ about_btn;
         System::Windows::Forms::Panel^ light_bg;
+        System::Windows::Forms::Button^ minimize_btn;
 
 
         bool dragging = false;
@@ -66,6 +67,7 @@ namespace RoadMap {
             this->edit_btn = (gcnew System::Windows::Forms::Button());
             this->create_btn = (gcnew System::Windows::Forms::Button());
             this->dark_bg = (gcnew System::Windows::Forms::Panel());
+            this->minimize_btn = (gcnew System::Windows::Forms::Button());
             this->choose_label = (gcnew System::Windows::Forms::Label());
             this->version_label = (gcnew System::Windows::Forms::Label());
             this->line_label = (gcnew System::Windows::Forms::Label());
@@ -142,6 +144,7 @@ namespace RoadMap {
             this->dark_bg->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(21)), static_cast<System::Int32>(static_cast<System::Byte>(20)),
                 static_cast<System::Int32>(static_cast<System::Byte>(26)));
             this->dark_bg->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+            this->dark_bg->Controls->Add(this->minimize_btn);
             this->dark_bg->Controls->Add(this->choose_label);
             this->dark_bg->Controls->Add(this->logo);
             this->dark_bg->Controls->Add(this->create_btn);
@@ -149,6 +152,22 @@ namespace RoadMap {
             this->dark_bg->Controls->Add(this->upload_btn);
             this->dark_bg->Controls->Add(this->close_btn);
             this->dark_bg->Name = L"dark_bg";
+            // 
+            // minimize_btn
+            // 
+            this->minimize_btn->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(21)), static_cast<System::Int32>(static_cast<System::Byte>(20)),
+                static_cast<System::Int32>(static_cast<System::Byte>(30)));
+            resources->ApplyResources(this->minimize_btn, L"minimize_btn");
+            this->minimize_btn->Cursor = System::Windows::Forms::Cursors::Hand;
+            this->minimize_btn->FlatAppearance->BorderColor = System::Drawing::Color::White;
+            this->minimize_btn->FlatAppearance->BorderSize = 0;
+            this->minimize_btn->FlatAppearance->MouseDownBackColor = System::Drawing::Color::White;
+            this->minimize_btn->FlatAppearance->MouseOverBackColor = System::Drawing::Color::White;
+            this->minimize_btn->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(21)), static_cast<System::Int32>(static_cast<System::Byte>(20)),
+                static_cast<System::Int32>(static_cast<System::Byte>(26)));
+            this->minimize_btn->Name = L"minimize_btn";
+            this->minimize_btn->UseVisualStyleBackColor = false;
+            this->minimize_btn->Click += gcnew System::EventHandler(this, &mainwindow::minimize_btn_Click);
             // 
             // choose_label
             // 
@@ -256,6 +275,12 @@ namespace RoadMap {
 
         System::Void close_btn_Click(System::Object^ sender, System::EventArgs^ e) {
             this->Close();
+        }
+
+        // Minimize button
+
+        System::Void minimize_btn_Click(System::Object^ sender, System::EventArgs^ e) {
+            this->WindowState = System::Windows::Forms::FormWindowState::Minimized;
         }
 
 		// Create new RoadMap button

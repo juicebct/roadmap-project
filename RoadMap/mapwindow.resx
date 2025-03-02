@@ -121,10 +121,18 @@
     <value>17, 17</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="minimize_btn.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        EQAACxEBf2RfkQAAAHdJREFUOE/tlNEJwCAMBbNZ3aTdRDdzJEdI84z5K6Uh6Z8HAaN4qMgjg5mLVJca
+        Uh6w51waRSbaXIrRTHZpn0KBEEfOokOYycgW8hYq+E1f6on9hnF+EXrj6hUI08MBwZqFBq0MqvYh6pQZ
+        MoGg9V4f7489h1qIbovS4qFatq4bAAAAAElFTkSuQmCC
+</value>
+  </data>
   <data name="close_btn.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        EgAACxIB0t1+/AAAAMRJREFUOE+tlI0NhCAMRhnBERyFERjBTWAENtINHMERGKHXj5+cd4Ki9iVNaAkv
+        DgAACw4BQL7hQQAAAMRJREFUOE+tlI0NhCAMRhnBERyFERjBTWAENtINHMERGKHXj5+cd4Ki9iVNaAkv
         0JCqAhFpjpkjcNwBZ6asSXDBxq132CKbUi6ChhBXlmKGUJIgLaSm0BhD27bl7Iv3ntZ1zdmRptBaS+M4
         /kidc4faP6dP3kt7ZOCyh5AOw9AlA5dC3ExMuH9mrac1msJaz3qkVWEIofltIH30bZ4C4d1xdQqEksNh
         gRCDVYo0aHnhUv4KF2UFLmDQLnGrH/QfZ3SyKPUB9KDFJaVjYLcAAAAASUVORK5CYII=
@@ -133,7 +141,7 @@
   <data name="logo.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAIIAAAAjCAYAAABYQ9K2AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        EAAACxABrSO9dQAACApJREFUeF7tmulSVEcUx0cWARcc3DdgEBRjotmMpeIyoiwKKO4RRAbyAOFLKvmm
+        DAAACwwBP0AiyAAACApJREFUeF7tmulSVEcUx0cWARcc3DdgEBRjotmMpeIyoiwKKO4RRAbyAOFLKvmm
         b6DfUpV8iC+QkjdIHiAJVkyMrDOssgxzYZCklOWk/5c55MydOwswk0Hr/qsO3Onbt7unz69P9+0em5kc
         tZrdUa+15NdNPMmr09y5d3y053Mf7b49TrtueWnnzTHacWOUtl8fpW3XRmjr1WHaXPuScq4Mkf3yEG2q
         GaTs6gHaWNVPGy710fqLfbSuwtOWUe55kl7W5QpUY2k1K/W0t3bfvUnNcXeS8usnSIFAcQGhspeyKjyU

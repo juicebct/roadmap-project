@@ -49,9 +49,11 @@ namespace RoadMap {
         System::Windows::Forms::Button^ close_btn;
         System::ComponentModel::Container^ components;
         System::Drawing::Point lastPoint;
+    private: System::Windows::Forms::Button^ minimize_btn;
 
 
-        bool dragging = false;
+
+           bool dragging = false;
 
 
 #pragma region Windows Form Designer generated code
@@ -68,6 +70,7 @@ namespace RoadMap {
                this->author_textbox = (gcnew System::Windows::Forms::TextBox());
                this->scroll_panel = (gcnew System::Windows::Forms::Panel());
                this->dark_bg = (gcnew System::Windows::Forms::Panel());
+               this->minimize_btn = (gcnew System::Windows::Forms::Button());
                this->close_btn = (gcnew System::Windows::Forms::Button());
                this->upload_btn = (gcnew System::Windows::Forms::Button());
                this->save_btn = (gcnew System::Windows::Forms::Button());
@@ -156,7 +159,7 @@ namespace RoadMap {
                this->progress_label->Font = (gcnew System::Drawing::Font(L"Arial Black", 8.25F, System::Drawing::FontStyle::Bold));
                this->progress_label->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
                    static_cast<System::Int32>(static_cast<System::Byte>(45)));
-               this->progress_label->Location = System::Drawing::Point(229, 80);
+               this->progress_label->Location = System::Drawing::Point(230, 80);
                this->progress_label->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
                this->progress_label->Name = L"progress_label";
                this->progress_label->Size = System::Drawing::Size(141, 15);
@@ -188,6 +191,7 @@ namespace RoadMap {
                // 
                this->dark_bg->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(21)), static_cast<System::Int32>(static_cast<System::Byte>(20)),
                    static_cast<System::Int32>(static_cast<System::Byte>(26)));
+               this->dark_bg->Controls->Add(this->minimize_btn);
                this->dark_bg->Controls->Add(this->close_btn);
                this->dark_bg->Controls->Add(this->upload_btn);
                this->dark_bg->Controls->Add(this->save_btn);
@@ -196,6 +200,26 @@ namespace RoadMap {
                this->dark_bg->Name = L"dark_bg";
                this->dark_bg->Size = System::Drawing::Size(200, 750);
                this->dark_bg->TabIndex = 27;
+               // 
+               // minimize_btn
+               // 
+               this->minimize_btn->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(21)), static_cast<System::Int32>(static_cast<System::Byte>(20)),
+                   static_cast<System::Int32>(static_cast<System::Byte>(30)));
+               this->minimize_btn->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"minimize_btn.BackgroundImage")));
+               this->minimize_btn->Cursor = System::Windows::Forms::Cursors::Hand;
+               this->minimize_btn->FlatAppearance->BorderColor = System::Drawing::Color::White;
+               this->minimize_btn->FlatAppearance->BorderSize = 0;
+               this->minimize_btn->FlatAppearance->MouseDownBackColor = System::Drawing::Color::White;
+               this->minimize_btn->FlatAppearance->MouseOverBackColor = System::Drawing::Color::White;
+               this->minimize_btn->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+               this->minimize_btn->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(21)), static_cast<System::Int32>(static_cast<System::Byte>(20)),
+                   static_cast<System::Int32>(static_cast<System::Byte>(26)));
+               this->minimize_btn->Location = System::Drawing::Point(140, 15);
+               this->minimize_btn->Name = L"minimize_btn";
+               this->minimize_btn->Size = System::Drawing::Size(20, 20);
+               this->minimize_btn->TabIndex = 17;
+               this->minimize_btn->UseVisualStyleBackColor = false;
+               this->minimize_btn->Click += gcnew System::EventHandler(this, &mapwindow::minimize_btn_Click);
                // 
                // close_btn
                // 
@@ -372,6 +396,12 @@ namespace RoadMap {
             }
         }
 
+		// Minimize button
+
+        System::Void minimize_btn_Click(System::Object^ sender, System::EventArgs^ e) {
+            this->WindowState = System::Windows::Forms::FormWindowState::Minimized;
+        }
+
         // Upload button
 
         System::Void uploadButton_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -385,7 +415,7 @@ namespace RoadMap {
             }
         }
 
-		 // Update progress label
+        // Update progress label
 
         System::Void UpdateProgressLabel() {
             int totalSubtopics = 0;
@@ -408,7 +438,7 @@ namespace RoadMap {
             }
         }
 
-		// Save button
+        // Display XML
 
         System::Void ReadAndDisplayXML(String^ filePath) {
             try {
@@ -490,7 +520,7 @@ namespace RoadMap {
                     String^ Subtopic = rowsNodes[i]->Attributes["Subtopic"]->Value;
 
                     CreateAndDisplaysubtopics(Topic, Description, Subtopic, yOffset, xmlDoc, "ROWS", i);
-                    yOffset += 30 * (Subtopic->Split(',')->Length);
+                    yOffset += 30 * (Subtopic->Split(';')->Length);
                 }
 
                 scroll_panel->AutoScroll = true;
@@ -504,67 +534,67 @@ namespace RoadMap {
             }
         }
 
-		// Display subtopics
-        
-         System::Void CreateAndDisplaysubtopics(String^ topic, String^ description, String^ subtopics, int yOffset, XmlDocument^ xmlDoc, String^ nodeType, int nodeIndex) {
+        // Display subtopics
 
-             Label^ topicLabel = gcnew Label();
-             topicLabel->AutoSize = true;
-             topicLabel->Font = (gcnew System::Drawing::Font(L"Arial", 10.25F, System::Drawing::FontStyle::Bold));
-             topicLabel->MaximumSize = System::Drawing::Size(250, 0);
-             topicLabel->Location = System::Drawing::Point(0, yOffset);
-             topicLabel->Text = topic;
-             scroll_panel->Controls->Add(topicLabel);
+        System::Void CreateAndDisplaysubtopics(String^ topic, String^ description, String^ subtopics, int yOffset, XmlDocument^ xmlDoc, String^ nodeType, int nodeIndex) {
 
-             Label^ descriptionLabel = gcnew Label();
-             descriptionLabel->AutoSize = true;
-             descriptionLabel->MaximumSize = System::Drawing::Size(250, 0);
-             descriptionLabel->Location = System::Drawing::Point(0, yOffset + 15);
-             descriptionLabel->Text = description;
-             scroll_panel->Controls->Add(descriptionLabel);
+            Label^ topicLabel = gcnew Label();
+            topicLabel->AutoSize = true;
+            topicLabel->Font = (gcnew System::Drawing::Font(L"Arial", 10.25F, System::Drawing::FontStyle::Bold));
+            topicLabel->MaximumSize = System::Drawing::Size(250, 0);
+            topicLabel->Location = System::Drawing::Point(0, yOffset);
+            topicLabel->Text = topic;
+            scroll_panel->Controls->Add(topicLabel);
 
-             array<String^>^ subtopicsArray = subtopics->Split(gcnew array<wchar_t>{','}, StringSplitOptions::RemoveEmptyEntries);
-             for (int i = 0; i < subtopicsArray->Length; i++) {
-                 String^ subtopic = subtopicsArray[i]->Trim();
+            Label^ descriptionLabel = gcnew Label();
+            descriptionLabel->AutoSize = true;
+            descriptionLabel->MaximumSize = System::Drawing::Size(250, 0);
+            descriptionLabel->Location = System::Drawing::Point(0, yOffset + 15);
+            descriptionLabel->Text = description;
+            scroll_panel->Controls->Add(descriptionLabel);
 
-                 Label^ numberLabel = gcnew Label();
-                 numberLabel->AutoSize = true;
-                 numberLabel->Font = gcnew System::Drawing::Font(L"Arial", 8.25F, System::Drawing::FontStyle::Bold);
-                 numberLabel->Location = System::Drawing::Point(250, yOffset + i * 30);
-                 numberLabel->Text = (i + 1).ToString() + ".";
-                 scroll_panel->Controls->Add(numberLabel);
+            array<String^>^ subtopicsArray = subtopics->Split(gcnew array<wchar_t>{';'}, StringSplitOptions::RemoveEmptyEntries);
+            for (int i = 0; i < subtopicsArray->Length; i++) {
+                String^ subtopic = subtopicsArray[i]->Trim();
 
-                 Label^ subtopicLabel = gcnew Label();
-                 subtopicLabel->AutoSize = true;
-                 subtopicLabel->MaximumSize = System::Drawing::Size(250, 0);
-                 subtopicLabel->Location = System::Drawing::Point(270, yOffset + i * 30);
-                 subtopicLabel->Text = subtopic;
-                 scroll_panel->Controls->Add(subtopicLabel);
+                Label^ numberLabel = gcnew Label();
+                numberLabel->AutoSize = true;
+                numberLabel->Font = gcnew System::Drawing::Font(L"Arial", 8.25F, System::Drawing::FontStyle::Bold);
+                numberLabel->Location = System::Drawing::Point(250, yOffset + i * 30);
+                numberLabel->Text = (i + 1).ToString() + ".";
+                scroll_panel->Controls->Add(numberLabel);
 
-                 CheckBox^ checkBox = gcnew CheckBox();
-                 checkBox->Location = System::Drawing::Point(550, yOffset + i * 30);
-                 checkBox->Tag = nodeType + ":" + nodeIndex + ":" + i;
-                 scroll_panel->Controls->Add(checkBox);
+                Label^ subtopicLabel = gcnew Label();
+                subtopicLabel->AutoSize = true;
+                subtopicLabel->MaximumSize = System::Drawing::Size(350, 0);
+                subtopicLabel->Location = System::Drawing::Point(270, yOffset + i * 30);
+                subtopicLabel->Text = subtopic;
+                scroll_panel->Controls->Add(subtopicLabel);
 
-                 XmlNodeList^ nodes = xmlDoc->GetElementsByTagName(nodeType);
-                 if (nodeIndex < nodes->Count) {
-                     XmlNode^ node = nodes[nodeIndex];
-                     String^ attributeName = "Subtopic";
-                     if (node->Attributes->GetNamedItem(attributeName)) {
-                         String^ subtopics = node->Attributes->GetNamedItem(attributeName)->Value;
-                         array<String^>^ subtopicsArray = subtopics->Split(',');
-                         if (i < subtopicsArray->Length) {
-                             String^ currentsubtopic = subtopicsArray[i]->Trim();
-                             if (currentsubtopic->Contains("[+]")) {
-                                 checkBox->Checked = true;
-                             }
-                         }
-                     }
-                 }
-             }
-         }
+                CheckBox^ checkBox = gcnew CheckBox();
+                checkBox->Location = System::Drawing::Point(650, yOffset + i * 30);
+                checkBox->Tag = nodeType + ":" + nodeIndex + ":" + i;
+                scroll_panel->Controls->Add(checkBox);
 
-		// Save button
+                XmlNodeList^ nodes = xmlDoc->GetElementsByTagName(nodeType);
+                if (nodeIndex < nodes->Count) {
+                    XmlNode^ node = nodes[nodeIndex];
+                    String^ attributeName = "Subtopic";
+                    if (node->Attributes->GetNamedItem(attributeName)) {
+                        String^ subtopics = node->Attributes->GetNamedItem(attributeName)->Value;
+                        array<String^>^ subtopicsArray = subtopics->Split(';');
+                        if (i < subtopicsArray->Length) {
+                            String^ currentsubtopic = subtopicsArray[i]->Trim();
+                            if (currentsubtopic->Contains("[+]")) {
+                                checkBox->Checked = true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // Save button
 
         System::Void saveButton_Click(System::Object^ sender, System::EventArgs^ e) {
             XmlDocument^ xmlDoc = gcnew XmlDocument();
