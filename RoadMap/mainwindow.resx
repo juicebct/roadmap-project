@@ -187,12 +187,12 @@
     <value>dark_bg</value>
   </data>
   <data name="&gt;&gt;logo.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="close_btn.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DQAACw0B7QfALAAAAMRJREFUOE+tlI0NhCAMRhnBERyFERjBTWAENtINHMERGKHXj5+cd4Ki9iVNaAkv
+        DAAACwwBP0AiyAAAAMRJREFUOE+tlI0NhCAMRhnBERyFERjBTWAENtINHMERGKHXj5+cd4Ki9iVNaAkv
         0JCqAhFpjpkjcNwBZ6asSXDBxq132CKbUi6ChhBXlmKGUJIgLaSm0BhD27bl7Iv3ntZ1zdmRptBaS+M4
         /kidc4faP6dP3kt7ZOCyh5AOw9AlA5dC3ExMuH9mrac1msJaz3qkVWEIofltIH30bZ4C4d1xdQqEksNh
         gRCDVYo0aHnhUv4KF2UFLmDQLnGrH/QfZ3SyKPUB9KDFJaVjYLcAAAAASUVORK5CYII=
@@ -226,7 +226,7 @@
     <value>dark_bg</value>
   </data>
   <data name="&gt;&gt;close_btn.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="upload_btn.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
@@ -234,7 +234,7 @@
   <data name="upload_btn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAeAAAAEOCAYAAABRmsRnAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DQAACw0B7QfALAAA/7JJREFUeF7s+8v3tu2WFYS90cRoIB4QBcR4QMD8AekrJAoKYjSKCIgcbKYp6Sat
+        DAAACwwBP0AiyAAA/7JJREFUeF7s+8v3tu2WFYS90cRoIB4QBcR4QMD8AekrJAoKYjSKCIgcbKYp6Sat
         MEYyErQbRkZ6SSNBGzZMJ61kQD8ZMWNgKVIcigKqdp323nXi27nWmnOuNde6r+f3vruq9qnq+caY41qH
         ueZa13Xd93N/v692ffqdf/IbX/3zf+qbX2H9xrc2FH+Vb3zzM/mAOE+u6/8P/4NvMt48z380S9cK2Nvv
         /JPQelW74+1//mxoP+K+7pjQ/tcfuQ3t4Qbv8SUIbpwVzuuuKz2dqdbf+Se/ftbXs7yCz7fnbTvOO/Rn
@@ -1481,7 +1481,7 @@
     <value>dark_bg</value>
   </data>
   <data name="&gt;&gt;upload_btn.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="edit_btn.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
@@ -1583,7 +1583,7 @@
     <value>dark_bg</value>
   </data>
   <data name="&gt;&gt;edit_btn.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="create_btn.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
@@ -1686,13 +1686,45 @@
     <value>dark_bg</value>
   </data>
   <data name="&gt;&gt;create_btn.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="dark_bg.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top</value>
   </data>
   <data name="dark_bg.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>None</value>
+  </data>
+  <data name="minimize_btn.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        DQAACw0B7QfALAAAAHdJREFUOE/tlNEJwCAMBbNZ3aTdRDdzJEdI84z5K6Uh6Z8HAaN4qMgjg5mLVJca
+        Uh6w51waRSbaXIrRTHZpn0KBEEfOokOYycgW8hYq+E1f6on9hnF+EXrj6hUI08MBwZqFBq0MqvYh6pQZ
+        MoGg9V4f7489h1qIbovS4qFatq4bAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="minimize_btn.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="minimize_btn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>790, 15</value>
+  </data>
+  <data name="minimize_btn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>20, 20</value>
+  </data>
+  <data name="minimize_btn.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="&gt;&gt;minimize_btn.Name" xml:space="preserve">
+    <value>minimize_btn</value>
+  </data>
+  <data name="&gt;&gt;minimize_btn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;minimize_btn.Parent" xml:space="preserve">
+    <value>dark_bg</value>
+  </data>
+  <data name="&gt;&gt;minimize_btn.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="choose_label.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1722,7 +1754,7 @@
     <value>dark_bg</value>
   </data>
   <data name="&gt;&gt;choose_label.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="dark_bg.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
@@ -1761,7 +1793,7 @@
     <value>11</value>
   </data>
   <data name="version_label.Text" xml:space="preserve">
-    <value>roadmap v1.0.0 - created by juicebct</value>
+    <value>roadmap v1.1.0 - created by juicebct</value>
   </data>
   <data name="&gt;&gt;version_label.Name" xml:space="preserve">
     <value>version_label</value>
@@ -1999,7 +2031,7 @@
     <value>CenterScreen</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>RoadMap v1.0.0</value>
+    <value>RoadMap Project v1.1.0</value>
   </data>
   <data name="&gt;&gt;backgroundWorker1.Name" xml:space="preserve">
     <value>backgroundWorker1</value>

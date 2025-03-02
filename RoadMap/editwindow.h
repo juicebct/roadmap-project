@@ -16,6 +16,7 @@ namespace RoadMap {
 	{
 
 		List<TextBox^>^ textBoxes = gcnew List<TextBox^>();
+		List<Label^>^ Labels = gcnew List<Label^>();
 
 	public:
 
@@ -63,7 +64,9 @@ namespace RoadMap {
 
 
 		int TopicCount = 0;
-		bool dragging = false;
+	private: System::Windows::Forms::Button^ minimize_btn;
+	private: System::Windows::Forms::Label^ sectionnumber_label;
+		   bool dragging = false;
 
 
 	protected:
@@ -89,6 +92,8 @@ namespace RoadMap {
 			this->deadline_label = (gcnew System::Windows::Forms::Label());
 			this->deletelast_btn = (gcnew System::Windows::Forms::Button());
 			this->light_bg = (gcnew System::Windows::Forms::Panel());
+			this->sectionnumber_label = (gcnew System::Windows::Forms::Label());
+			this->minimize_btn = (gcnew System::Windows::Forms::Button());
 			this->scroll_panel = (gcnew System::Windows::Forms::Panel());
 			this->description_textbox = (gcnew System::Windows::Forms::TextBox());
 			this->topic_textbox = (gcnew System::Windows::Forms::TextBox());
@@ -296,11 +301,13 @@ namespace RoadMap {
 			this->deletelast_btn->Text = L"DELETE LAST ROW";
 			this->deletelast_btn->UseVisualStyleBackColor = false;
 			this->deletelast_btn->Visible = false;
-			this->deletelast_btn->Click += gcnew System::EventHandler(this, &editwindow::deletelast_btn_Click_1);
+			this->deletelast_btn->Click += gcnew System::EventHandler(this, &editwindow::deletelast_btn_Click);
 			// 
 			// light_bg
 			// 
 			this->light_bg->BackColor = System::Drawing::Color::White;
+			this->light_bg->Controls->Add(this->sectionnumber_label);
+			this->light_bg->Controls->Add(this->minimize_btn);
 			this->light_bg->Controls->Add(this->scroll_panel);
 			this->light_bg->Controls->Add(this->description_textbox);
 			this->light_bg->Controls->Add(this->topic_textbox);
@@ -321,14 +328,51 @@ namespace RoadMap {
 			this->light_bg->Size = System::Drawing::Size(850, 650);
 			this->light_bg->TabIndex = 24;
 			// 
+			// sectionnumber_label
+			// 
+			this->sectionnumber_label->AutoSize = true;
+			this->sectionnumber_label->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)),
+				static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(45)));
+			this->sectionnumber_label->Font = (gcnew System::Drawing::Font(L"Arial Black", 8.25F, System::Drawing::FontStyle::Bold));
+			this->sectionnumber_label->ForeColor = System::Drawing::Color::White;
+			this->sectionnumber_label->Location = System::Drawing::Point(50, 200);
+			this->sectionnumber_label->Margin = System::Windows::Forms::Padding(0);
+			this->sectionnumber_label->Name = L"sectionnumber_label";
+			this->sectionnumber_label->Padding = System::Windows::Forms::Padding(0, 0, 0, 5);
+			this->sectionnumber_label->Size = System::Drawing::Size(18, 20);
+			this->sectionnumber_label->TabIndex = 29;
+			this->sectionnumber_label->Text = L"0.";
+			// 
+			// minimize_btn
+			// 
+			this->minimize_btn->BackColor = System::Drawing::Color::White;
+			this->minimize_btn->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"minimize_btn.BackgroundImage")));
+			this->minimize_btn->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->minimize_btn->FlatAppearance->BorderColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(21)),
+				static_cast<System::Int32>(static_cast<System::Byte>(20)), static_cast<System::Int32>(static_cast<System::Byte>(26)));
+			this->minimize_btn->FlatAppearance->BorderSize = 0;
+			this->minimize_btn->FlatAppearance->MouseDownBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(21)),
+				static_cast<System::Int32>(static_cast<System::Byte>(20)), static_cast<System::Int32>(static_cast<System::Byte>(26)));
+			this->minimize_btn->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(21)),
+				static_cast<System::Int32>(static_cast<System::Byte>(20)), static_cast<System::Int32>(static_cast<System::Byte>(26)));
+			this->minimize_btn->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->minimize_btn->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(21)), static_cast<System::Int32>(static_cast<System::Byte>(20)),
+				static_cast<System::Int32>(static_cast<System::Byte>(26)));
+			this->minimize_btn->Location = System::Drawing::Point(790, 15);
+			this->minimize_btn->Name = L"minimize_btn";
+			this->minimize_btn->Size = System::Drawing::Size(20, 20);
+			this->minimize_btn->TabIndex = 28;
+			this->minimize_btn->UseVisualStyleBackColor = false;
+			this->minimize_btn->Click += gcnew System::EventHandler(this, &editwindow::minimize_btn_Click);
+			// 
 			// scroll_panel
 			// 
 			this->scroll_panel->AutoScroll = true;
 			this->scroll_panel->BackColor = System::Drawing::Color::White;
 			this->scroll_panel->Font = (gcnew System::Drawing::Font(L"Arial", 8.25F, System::Drawing::FontStyle::Bold));
-			this->scroll_panel->Location = System::Drawing::Point(50, 277);
+			this->scroll_panel->Location = System::Drawing::Point(32, 277);
 			this->scroll_panel->Name = L"scroll_panel";
-			this->scroll_panel->Size = System::Drawing::Size(775, 370);
+			this->scroll_panel->Size = System::Drawing::Size(800, 367);
 			this->scroll_panel->TabIndex = 26;
 			// 
 			// description_textbox
@@ -337,7 +381,7 @@ namespace RoadMap {
 			this->description_textbox->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
 			this->description_textbox->Enabled = false;
 			this->description_textbox->Font = (gcnew System::Drawing::Font(L"Arial", 8.25F, System::Drawing::FontStyle::Bold));
-			this->description_textbox->ForeColor = System::Drawing::Color::Black;
+			this->description_textbox->ForeColor = System::Drawing::Color::Gray;
 			this->description_textbox->Location = System::Drawing::Point(50, 230);
 			this->description_textbox->Margin = System::Windows::Forms::Padding(4);
 			this->description_textbox->MaxLength = 150;
@@ -355,12 +399,12 @@ namespace RoadMap {
 			this->topic_textbox->Enabled = false;
 			this->topic_textbox->Font = (gcnew System::Drawing::Font(L"Arial", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->topic_textbox->ForeColor = System::Drawing::Color::Black;
-			this->topic_textbox->Location = System::Drawing::Point(50, 200);
+			this->topic_textbox->ForeColor = System::Drawing::Color::Gray;
+			this->topic_textbox->Location = System::Drawing::Point(75, 200);
 			this->topic_textbox->Margin = System::Windows::Forms::Padding(4);
 			this->topic_textbox->MaxLength = 45;
 			this->topic_textbox->Name = L"topic_textbox";
-			this->topic_textbox->Size = System::Drawing::Size(200, 20);
+			this->topic_textbox->Size = System::Drawing::Size(175, 20);
 			this->topic_textbox->TabIndex = 24;
 			this->topic_textbox->Text = L"#Enter topicname";
 			// 
@@ -370,7 +414,7 @@ namespace RoadMap {
 			this->subtopic_textbox->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
 			this->subtopic_textbox->Enabled = false;
 			this->subtopic_textbox->Font = (gcnew System::Drawing::Font(L"Arial", 8.25F, System::Drawing::FontStyle::Bold));
-			this->subtopic_textbox->ForeColor = System::Drawing::Color::Black;
+			this->subtopic_textbox->ForeColor = System::Drawing::Color::Gray;
 			this->subtopic_textbox->Location = System::Drawing::Point(300, 200);
 			this->subtopic_textbox->Margin = System::Windows::Forms::Padding(4);
 			this->subtopic_textbox->MaxLength = 1000;
@@ -379,7 +423,8 @@ namespace RoadMap {
 			this->subtopic_textbox->ScrollBars = System::Windows::Forms::ScrollBars::Vertical;
 			this->subtopic_textbox->Size = System::Drawing::Size(500, 70);
 			this->subtopic_textbox->TabIndex = 25;
-			this->subtopic_textbox->Text = L"#Enter subtopics names. Use \",\" (commas) to separate suptopics.\r\n";
+			this->subtopic_textbox->Text = L"#Enter subtopics names. Use \";\" (semicolon) to separate suptopics.\r\n\r\nThis is exa"
+				L"mple row. To start creating your RoadMap, please use \"ADD NEW ROW\" button.";
 			// 
 			// close_btn
 			// 
@@ -519,6 +564,12 @@ namespace RoadMap {
 			}
 		}
 
+		// Minimize button
+
+		System::Void minimize_btn_Click(System::Object^ sender, System::EventArgs^ e) {
+			this->WindowState = System::Windows::Forms::FormWindowState::Minimized;
+		}
+
 		// Add new row button
 
 		System::Void addnew_btn_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -530,6 +581,7 @@ namespace RoadMap {
 			TextBox^ newtopic_textbox = gcnew TextBox();
 			TextBox^ newsubtopic_textbox = gcnew TextBox();
 			TextBox^ newdescription_textbox = gcnew TextBox();
+			Label^ newsectionnumber_label = gcnew Label();
 
 			int verticalSpacing = 60;
 
@@ -537,8 +589,11 @@ namespace RoadMap {
 
 			if (TopicCount == 0) {
 				newY = topic_textbox->Location.Y + topic_textbox->Height + verticalSpacing;
+
 				newtopic_textbox->Location = System::Drawing::Point(topic_textbox->Location.X - scroll_panel->Location.X, newY - scroll_panel->Location.Y);
 				newtopic_textbox->Size = topic_textbox->Size;
+
+				newsectionnumber_label->Location = System::Drawing::Point(newtopic_textbox->Location.X - 25, newY - scroll_panel->Location.Y);
 
 				newsubtopic_textbox->Location = System::Drawing::Point(subtopic_textbox->Location.X - scroll_panel->Location.X, newY - scroll_panel->Location.Y);
 				newsubtopic_textbox->Size = subtopic_textbox->Size;
@@ -553,6 +608,9 @@ namespace RoadMap {
 				newtopic_textbox->Location = System::Drawing::Point(lasttopic_textbox->Location.X, newY);
 				newtopic_textbox->Size = lasttopic_textbox->Size;
 
+				Label^ lastsectionnumber_label = (Label^)Labels[Labels->Count - 1];
+				newsectionnumber_label->Location = System::Drawing::Point(newtopic_textbox->Location.X - 25, newY);
+
 				TextBox^ lastsubtopic_textbox = (TextBox^)textBoxes[textBoxes->Count - 2];
 				newsubtopic_textbox->Location = System::Drawing::Point(lastsubtopic_textbox->Location.X, newY);
 				newsubtopic_textbox->Size = lastsubtopic_textbox->Size;
@@ -560,7 +618,19 @@ namespace RoadMap {
 				TextBox^ lastdescription_textbox = (TextBox^)textBoxes[textBoxes->Count - 1];
 				newdescription_textbox->Location = System::Drawing::Point(lastdescription_textbox->Location.X, newY + 27);
 				newdescription_textbox->Size = lastdescription_textbox->Size;
+
 			}
+
+			newsectionnumber_label->AutoSize = true;
+			newsectionnumber_label->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)),
+				static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(45)));
+			newsectionnumber_label->Font = (gcnew System::Drawing::Font(L"Arial Black", 8.25F, System::Drawing::FontStyle::Bold));
+			newsectionnumber_label->ForeColor = System::Drawing::Color::White;
+			newsectionnumber_label->Margin = System::Windows::Forms::Padding(0);
+			newsectionnumber_label->Padding = System::Windows::Forms::Padding(0, 0, 0, 5);
+			newsectionnumber_label->Size = System::Drawing::Size(18, 20);
+			newsectionnumber_label->Text = (TopicCount + 1).ToString() + ".";
+			newsectionnumber_label->BringToFront();
 
 			newtopic_textbox->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
 			newsubtopic_textbox->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
@@ -570,7 +640,11 @@ namespace RoadMap {
 			newsubtopic_textbox->Name = "subtopic_textbox_" + TopicCount.ToString();
 			newdescription_textbox->Name = "description_textbox_" + TopicCount.ToString();
 
-			newtopic_textbox->MaxLength = 45;
+			newtopic_textbox->ForeColor = System::Drawing::Color::Black;
+			newsubtopic_textbox->ForeColor = System::Drawing::Color::Black;
+			newdescription_textbox->ForeColor = System::Drawing::Color::Black;
+
+			newtopic_textbox->MaxLength = 40;
 			newsubtopic_textbox->MaxLength = 1500;
 			newdescription_textbox->MaxLength = 150;
 
@@ -580,10 +654,12 @@ namespace RoadMap {
 			newdescription_textbox->Multiline = true;
 			newdescription_textbox->ScrollBars = System::Windows::Forms::ScrollBars::Vertical;
 
+			this->scroll_panel->Controls->Add(newsectionnumber_label);
 			this->scroll_panel->Controls->Add(newtopic_textbox);
 			this->scroll_panel->Controls->Add(newsubtopic_textbox);
 			this->scroll_panel->Controls->Add(newdescription_textbox);
 
+			Labels->Add(newsectionnumber_label);
 			textBoxes->Add(newtopic_textbox);
 			textBoxes->Add(newsubtopic_textbox);
 			textBoxes->Add(newdescription_textbox);
@@ -607,35 +683,29 @@ namespace RoadMap {
 				String^ subtopicText = textBoxes[i + 1]->Text->Trim();
 				String^ descriptionText = textBoxes[i + 2]->Text->Trim();
 
-				int subtopicCount = subtopicText->Split(gcnew array<wchar_t>{','}, StringSplitOptions::RemoveEmptyEntries)->Length;
+				int subtopicCount = subtopicText->Split(gcnew array<wchar_t>{';'}, StringSplitOptions::RemoveEmptyEntries)->Length;
 
 				if (descriptionText->Length > 0 && subtopicCount < 4) {
-					MessageBox::Show("Error occurred while saving the Roadmap: Each row must have at least 4 subtopics if a description is provided. Please add more subtopics before saving.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+					MessageBox::Show("Error occurred while saving the Roadmap: Each row must have at least 4 subtopics if a description is provided. Please add more subtopics before saving (Section number: " + (i / 3 + 1).ToString() + ").", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 					return;
 				}
 				String^ TopicText = textBoxes[i]->Text->Trim();
 				if (TopicText->Length > 40 || TopicText->Length == 0) {
-					MessageBox::Show("Error occurred while saving the Roadmap: Topic name can be up to 40 characters long and cannot be empty (Row number: " + (i / 3 + 1).ToString() + ").", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+					MessageBox::Show("Error occurred while saving the Roadmap: Topic name can be up to 40 characters long and cannot be empty (Section number: " + (i / 3 + 1).ToString() + ").", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 					return;
 				}
 				if (descriptionText->Length > 150) {
-					MessageBox::Show("Error occurred while saving the Roadmap: Description can be up to 150 characters long (Row number: " + (i / 3 + 1).ToString() + ").", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+					MessageBox::Show("Error occurred while saving the Roadmap: Description can be up to 150 characters long (Section number: " + (i / 3 + 1).ToString() + ").", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 					return;
 				}
 				if (String::IsNullOrWhiteSpace(subtopicText)) {
-					MessageBox::Show("Error occurred while saving the Roadmap: Subtopic cannot be empty (Row number: " + (i / 3 + 1).ToString() + ").", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+					MessageBox::Show("Error occurred while saving the Roadmap: Subtopic cannot be empty in section (Section number: " + (i / 3 + 1).ToString() + ").", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 					return;
 				}
-				int commaIndex = subtopicText->IndexOf(",");
+				int commaIndex = subtopicText->IndexOf(";");
 				if (commaIndex >= 0) {
-					if (commaIndex > 45) {
-						MessageBox::Show("Error occurred while saving the Roadmap: You can enter only 45 symbols before comma in subtopics (Row number: " + (i / 3 + 1).ToString() + ").", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
-						return;
-					}
-				}
-				else {
-					if (subtopicText->Length > 45) {
-						MessageBox::Show("Error occurred while saving the Roadmap: You can enter only 45 symbols before comma in subtopics (Row number: " + (i / 3 + 1).ToString() + ").", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+					if (commaIndex > 100) {
+						MessageBox::Show("Error occurred while saving the Roadmap: You can enter only 100 symbols before semicolon in subtopics (Section number: " + (i / 3 + 1).ToString() + ". Number of symbols now: " + commaIndex + ").", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 						return;
 					}
 				}
@@ -678,7 +748,7 @@ namespace RoadMap {
 				if (saveFileDialog1->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
 					String^ filePath = saveFileDialog1->FileName;
 					xmlDoc->Save(filePath);
-					MessageBox::Show("Roadmap saved successfully. \n\nPlease, go back to the start window and choose 'UPLOAD EXISTING ROADMAP'.", "Success", MessageBoxButtons::OK, MessageBoxIcon::Information);
+					MessageBox::Show("Roadmap saved successfully. \n\nPlease, go back to the mainpage and choose 'UPLOAD' button.", "Success", MessageBoxButtons::OK, MessageBoxIcon::Information);
 				}
 			}
 			catch (Exception^ ex) {
@@ -688,7 +758,7 @@ namespace RoadMap {
 
 		// Delete last row button
 
-		System::Void deletelast_btn_Click_1(System::Object^ sender, System::EventArgs^ e) {
+		System::Void deletelast_btn_Click(System::Object^ sender, System::EventArgs^ e) {
 			if (textBoxes->Count > 3) {
 				System::Windows::Forms::DialogResult result = MessageBox::Show(
 					"Are you sure you want to delete the last row?",
@@ -700,14 +770,17 @@ namespace RoadMap {
 					TextBox^ lastdescription_textbox = safe_cast<TextBox^>(textBoxes[textBoxes->Count - 1]);
 					TextBox^ lastsubtopic_textbox = safe_cast<TextBox^>(textBoxes[textBoxes->Count - 2]);
 					TextBox^ lasttopic_textbox = safe_cast<TextBox^>(textBoxes[textBoxes->Count - 3]);
+					Label^ newsectionnumber_label = safe_cast<Label^>(Labels[Labels->Count - 1]);
 
 					this->scroll_panel->Controls->Remove(lastdescription_textbox);
 					this->scroll_panel->Controls->Remove(lastsubtopic_textbox);
 					this->scroll_panel->Controls->Remove(lasttopic_textbox);
+					this->scroll_panel->Controls->Remove(newsectionnumber_label);
 
 					textBoxes->RemoveAt(textBoxes->Count - 1);
 					textBoxes->RemoveAt(textBoxes->Count - 1);
 					textBoxes->RemoveAt(textBoxes->Count - 1);
+					Labels->RemoveAt(Labels->Count - 1);
 
 					int newHeight = (textBoxes->Count > 0) ? textBoxes[textBoxes->Count - 1]->Location.Y + textBoxes[textBoxes->Count - 1]->Height + 50 : 0;
 					this->scroll_panel->AutoScrollMinSize = System::Drawing::Size(this->scroll_panel->ClientSize.Width, newHeight);
