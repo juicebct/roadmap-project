@@ -49,8 +49,7 @@ namespace RoadMap {
         System::Windows::Forms::Button^ close_btn;
         System::ComponentModel::Container^ components;
         System::Drawing::Point lastPoint;
-    private: System::Windows::Forms::Button^ minimize_btn;
-
+        System::Windows::Forms::Button^ minimize_btn;
 
 
            bool dragging = false;
@@ -342,7 +341,7 @@ namespace RoadMap {
                this->MinimizeBox = false;
                this->Name = L"mapwindow";
                this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
-               this->Text = L"RoadMap - Progress Map";
+               this->Text = L"RoadMap Project - Roadmap progress tracker";
                this->dark_bg->ResumeLayout(false);
                this->light_bg->ResumeLayout(false);
                this->light_bg->PerformLayout();
@@ -396,7 +395,7 @@ namespace RoadMap {
             }
         }
 
-		// Minimize button
+        // Minimize button
 
         System::Void minimize_btn_Click(System::Object^ sender, System::EventArgs^ e) {
             this->WindowState = System::Windows::Forms::FormWindowState::Minimized;
@@ -421,7 +420,7 @@ namespace RoadMap {
             int totalSubtopics = 0;
             int completedSubtopics = 0;
 
-            for each (Control ^ control in scroll_panel->Controls) {
+            for each(Control ^ control in scroll_panel->Controls) {
                 if (CheckBox^ checkBox = dynamic_cast<CheckBox^>(control)) {
                     totalSubtopics++;
                     if (checkBox->Checked) {
@@ -519,9 +518,10 @@ namespace RoadMap {
                     String^ Description = rowsNodes[i]->Attributes["Description"]->Value;
                     String^ Subtopic = rowsNodes[i]->Attributes["Subtopic"]->Value;
 
-                    CreateAndDisplaysubtopics(Topic, Description, Subtopic, yOffset, xmlDoc, "ROWS", i);
-                    yOffset += 30 * (Subtopic->Split(';')->Length);
+                    CreateAndDisplayTopics(Topic, Description, Subtopic, yOffset, xmlDoc, "ROWS", i);
+                    yOffset += 25;
                 }
+
 
                 scroll_panel->AutoScroll = true;
                 scroll_panel->AutoScrollMinSize = System::Drawing::Size(0, yOffset);
@@ -534,64 +534,81 @@ namespace RoadMap {
             }
         }
 
-        // Display subtopics
+		// Create and display all topics
 
-        System::Void CreateAndDisplaysubtopics(String^ topic, String^ description, String^ subtopics, int yOffset, XmlDocument^ xmlDoc, String^ nodeType, int nodeIndex) {
+        System::Void CreateAndDisplayTopics(String^ topic, String^ description, String^ subtopics, int& yOffset, XmlDocument^ xmlDoc, String^ nodeType, int nodeIndex) {
+            int initialYOffset = yOffset;
 
             Label^ topicLabel = gcnew Label();
             topicLabel->AutoSize = true;
             topicLabel->Font = (gcnew System::Drawing::Font(L"Arial", 10.25F, System::Drawing::FontStyle::Bold));
             topicLabel->MaximumSize = System::Drawing::Size(250, 0);
-            topicLabel->Location = System::Drawing::Point(0, yOffset);
+            topicLabel->Location = System::Drawing::Point(0, initialYOffset);
             topicLabel->Text = topic;
             scroll_panel->Controls->Add(topicLabel);
+
+            yOffset += topicLabel->Height + 5;
 
             Label^ descriptionLabel = gcnew Label();
             descriptionLabel->AutoSize = true;
             descriptionLabel->MaximumSize = System::Drawing::Size(250, 0);
-            descriptionLabel->Location = System::Drawing::Point(0, yOffset + 15);
+            descriptionLabel->Location = System::Drawing::Point(0, yOffset);
             descriptionLabel->Text = description;
             scroll_panel->Controls->Add(descriptionLabel);
 
+            yOffset += descriptionLabel->Height + 10;
+
+            int subtopicYOffset = initialYOffset;
+
             array<String^>^ subtopicsArray = subtopics->Split(gcnew array<wchar_t>{';'}, StringSplitOptions::RemoveEmptyEntries);
-            for (int i = 0; i < subtopicsArray->Length; i++) {
-                String^ subtopic = subtopicsArray[i]->Trim();
 
-                Label^ numberLabel = gcnew Label();
-                numberLabel->AutoSize = true;
-                numberLabel->Font = gcnew System::Drawing::Font(L"Arial", 8.25F, System::Drawing::FontStyle::Bold);
-                numberLabel->Location = System::Drawing::Point(250, yOffset + i * 30);
-                numberLabel->Text = (i + 1).ToString() + ".";
-                scroll_panel->Controls->Add(numberLabel);
+            XmlNodeList^ nodes = xmlDoc->GetElementsByTagName(nodeType);
+            if (nodeIndex < nodes->Count) {
+                XmlNode^ node = nodes[nodeIndex];
+                String^ attributeName = "Subtopic";
 
-                Label^ subtopicLabel = gcnew Label();
-                subtopicLabel->AutoSize = true;
-                subtopicLabel->MaximumSize = System::Drawing::Size(350, 0);
-                subtopicLabel->Location = System::Drawing::Point(270, yOffset + i * 30);
-                subtopicLabel->Text = subtopic;
-                scroll_panel->Controls->Add(subtopicLabel);
+                if (node->Attributes->GetNamedItem(attributeName)) {
+                    String^ subtopicsFromXml = node->Attributes->GetNamedItem(attributeName)->Value;
+                    array<String^>^ subtopicsFromXmlArray = subtopicsFromXml->Split(';');
 
-                CheckBox^ checkBox = gcnew CheckBox();
-                checkBox->Location = System::Drawing::Point(650, yOffset + i * 30);
-                checkBox->Tag = nodeType + ":" + nodeIndex + ":" + i;
-                scroll_panel->Controls->Add(checkBox);
+                    for (int i = 0; i < subtopicsArray->Length; i++) {
+                        String^ subtopic = subtopicsArray[i]->Trim();
 
-                XmlNodeList^ nodes = xmlDoc->GetElementsByTagName(nodeType);
-                if (nodeIndex < nodes->Count) {
-                    XmlNode^ node = nodes[nodeIndex];
-                    String^ attributeName = "Subtopic";
-                    if (node->Attributes->GetNamedItem(attributeName)) {
-                        String^ subtopics = node->Attributes->GetNamedItem(attributeName)->Value;
-                        array<String^>^ subtopicsArray = subtopics->Split(';');
-                        if (i < subtopicsArray->Length) {
-                            String^ currentsubtopic = subtopicsArray[i]->Trim();
+                        Label^ numberLabel = gcnew Label();
+                        numberLabel->AutoSize = true;
+                        numberLabel->Font = gcnew System::Drawing::Font(L"Arial", 8.25F, System::Drawing::FontStyle::Bold);
+                        numberLabel->Location = System::Drawing::Point(250, subtopicYOffset);
+                        numberLabel->Text = (i + 1).ToString() + ".";
+                        scroll_panel->Controls->Add(numberLabel);
+
+                        Label^ subtopicLabel = gcnew Label();
+                        subtopicLabel->AutoSize = true;
+                        subtopicLabel->MaximumSize = System::Drawing::Size(350, 0);
+                        subtopicLabel->Location = System::Drawing::Point(270, subtopicYOffset);
+
+                        String^ cleanSubtopic = subtopic->Replace(L"[+]", L"");
+                        subtopicLabel->Text = cleanSubtopic;
+                        scroll_panel->Controls->Add(subtopicLabel);
+
+                        CheckBox^ checkBox = gcnew CheckBox();
+                        checkBox->Location = System::Drawing::Point(625, subtopicYOffset);
+                        checkBox->Tag = nodeType + ":" + nodeIndex + ":" + i;
+
+                        if (i < subtopicsFromXmlArray->Length) {
+                            String^ currentsubtopic = subtopicsFromXmlArray[i]->Trim();
                             if (currentsubtopic->Contains("[+]")) {
                                 checkBox->Checked = true;
                             }
                         }
+
+                        scroll_panel->Controls->Add(checkBox);
+
+                        subtopicYOffset += max(numberLabel->Height, subtopicLabel->Height) + 5;
                     }
                 }
             }
+
+            yOffset = max(yOffset, subtopicYOffset) + 20;
         }
 
         // Save button
@@ -600,7 +617,7 @@ namespace RoadMap {
             XmlDocument^ xmlDoc = gcnew XmlDocument();
             xmlDoc->Load(openFileDialog1->FileName);
 
-            for each (Control ^ control in scroll_panel->Controls) {
+            for each(Control ^ control in scroll_panel->Controls) {
                 if (CheckBox^ checkBox = dynamic_cast<CheckBox^>(control)) {
                     array<String^>^ tagParts = checkBox->Tag->ToString()->Split(':');
                     String^ nodeType = tagParts[0];
@@ -611,9 +628,11 @@ namespace RoadMap {
                     if (nodeIndex < nodes->Count) {
                         XmlNode^ node = nodes[nodeIndex];
                         String^ attributeName = "Subtopic";
+
                         if (node->Attributes->GetNamedItem(attributeName)) {
                             String^ subtopics = node->Attributes->GetNamedItem(attributeName)->Value;
-                            array<String^>^ subtopicsArray = subtopics->Split(',');
+                            array<String^>^ subtopicsArray = subtopics->Split(';');
+
                             if (subtopicIndex < subtopicsArray->Length) {
                                 if (checkBox->Checked) {
                                     if (!subtopicsArray[subtopicIndex]->Contains("[+]")) {
@@ -623,13 +642,15 @@ namespace RoadMap {
                                 else {
                                     subtopicsArray[subtopicIndex] = subtopicsArray[subtopicIndex]->Replace(" [+]", "");
                                 }
-                                String^ newsubtopics = String::Join(",", subtopicsArray);
-                                node->Attributes->GetNamedItem(attributeName)->Value = newsubtopics;
+
+                                String^ newSubtopics = String::Join(";", subtopicsArray);
+                                node->Attributes->GetNamedItem(attributeName)->Value = newSubtopics;
                             }
                         }
                     }
                 }
             }
+
             xmlDoc->Save(openFileDialog1->FileName);
             MessageBox::Show("Changes saved successfully!");
 

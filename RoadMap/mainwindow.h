@@ -45,9 +45,13 @@ namespace RoadMap {
         System::Windows::Forms::Label^ version_label;
         System::Windows::Forms::Label^ line_label;
         System::Windows::Forms::LinkLabel^ sourceCode_btn;
-        System::Windows::Forms::LinkLabel^ about_btn;
+    private: System::Windows::Forms::LinkLabel^ dev_btn;
+
         System::Windows::Forms::Panel^ light_bg;
         System::Windows::Forms::Button^ minimize_btn;
+    private: System::Windows::Forms::LinkLabel^ docs_btn;
+
+    private: System::Windows::Forms::Label^ label1;
 
 
         bool dragging = false;
@@ -72,8 +76,10 @@ namespace RoadMap {
             this->version_label = (gcnew System::Windows::Forms::Label());
             this->line_label = (gcnew System::Windows::Forms::Label());
             this->sourceCode_btn = (gcnew System::Windows::Forms::LinkLabel());
-            this->about_btn = (gcnew System::Windows::Forms::LinkLabel());
+            this->dev_btn = (gcnew System::Windows::Forms::LinkLabel());
             this->light_bg = (gcnew System::Windows::Forms::Panel());
+            this->docs_btn = (gcnew System::Windows::Forms::LinkLabel());
+            this->label1 = (gcnew System::Windows::Forms::Label());
             (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->logo))->BeginInit();
             this->dark_bg->SuspendLayout();
             this->light_bg->SuspendLayout();
@@ -198,23 +204,45 @@ namespace RoadMap {
                 static_cast<System::Int32>(static_cast<System::Byte>(99)), static_cast<System::Int32>(static_cast<System::Byte>(246)));
             this->sourceCode_btn->LinkClicked += gcnew System::Windows::Forms::LinkLabelLinkClickedEventHandler(this, &mainwindow::sourceCode_btn_LinkClicked);
             // 
-            // about_btn
+            // dev_btn
             // 
-            this->about_btn->ActiveLinkColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(99)),
+            this->dev_btn->ActiveLinkColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(99)),
                 static_cast<System::Int32>(static_cast<System::Byte>(246)));
-            resources->ApplyResources(this->about_btn, L"about_btn");
-            this->about_btn->LinkColor = System::Drawing::Color::Black;
-            this->about_btn->Name = L"about_btn";
-            this->about_btn->TabStop = true;
-            this->about_btn->VisitedLinkColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(99)),
+            resources->ApplyResources(this->dev_btn, L"dev_btn");
+            this->dev_btn->LinkColor = System::Drawing::Color::Black;
+            this->dev_btn->Name = L"dev_btn";
+            this->dev_btn->TabStop = true;
+            this->dev_btn->VisitedLinkColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(99)),
                 static_cast<System::Int32>(static_cast<System::Byte>(246)));
-            this->about_btn->LinkClicked += gcnew System::Windows::Forms::LinkLabelLinkClickedEventHandler(this, &mainwindow::about_btn_LinkClicked);
+            this->dev_btn->LinkClicked += gcnew System::Windows::Forms::LinkLabelLinkClickedEventHandler(this, &mainwindow::dev_btn_LinkClicked);
             // 
             // light_bg
             // 
             resources->ApplyResources(this->light_bg, L"light_bg");
+            this->light_bg->Controls->Add(this->docs_btn);
+            this->light_bg->Controls->Add(this->label1);
             this->light_bg->Controls->Add(this->sourceCode_btn);
+            this->light_bg->Controls->Add(this->line_label);
+            this->light_bg->Controls->Add(this->dev_btn);
             this->light_bg->Name = L"light_bg";
+            // 
+            // docs_btn
+            // 
+            this->docs_btn->ActiveLinkColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(99)),
+                static_cast<System::Int32>(static_cast<System::Byte>(246)));
+            resources->ApplyResources(this->docs_btn, L"docs_btn");
+            this->docs_btn->ForeColor = System::Drawing::SystemColors::Control;
+            this->docs_btn->LinkColor = System::Drawing::Color::Black;
+            this->docs_btn->Name = L"docs_btn";
+            this->docs_btn->TabStop = true;
+            this->docs_btn->VisitedLinkColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(99)),
+                static_cast<System::Int32>(static_cast<System::Byte>(246)));
+            this->docs_btn->LinkClicked += gcnew System::Windows::Forms::LinkLabelLinkClickedEventHandler(this, &mainwindow::docs_btn_LinkClicked);
+            // 
+            // label1
+            // 
+            resources->ApplyResources(this->label1, L"label1");
+            this->label1->Name = L"label1";
             // 
             // mainwindow
             // 
@@ -222,8 +250,6 @@ namespace RoadMap {
             this->BackColor = System::Drawing::Color::White;
             resources->ApplyResources(this, L"$this");
             this->Controls->Add(this->version_label);
-            this->Controls->Add(this->about_btn);
-            this->Controls->Add(this->line_label);
             this->Controls->Add(this->light_bg);
             this->Controls->Add(this->dark_bg);
             this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
@@ -310,10 +336,16 @@ namespace RoadMap {
             System::Diagnostics::Process::Start("https://github.com/juicebct/roadmap-project");
         }
 
-		// Open about link
+		// Open dev link
 
-        System::Void about_btn_LinkClicked(System::Object^ sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^ e) {
+        System::Void dev_btn_LinkClicked(System::Object^ sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^ e) {
             System::Diagnostics::Process::Start("https://juicebct.github.io/juicebct/");
+		}
+
+        // Open docs link
+
+        System::Void docs_btn_LinkClicked(System::Object^ sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^ e) {
+            System::Diagnostics::Process::Start("https://docs.google.com/document/d/1kklOqX-ad-GdSpk1WSLMWiY8K1Zhq8FAEXWsosPrI90");
         }
     };
 }
