@@ -1697,7 +1697,7 @@
   <data name="minimize_btn.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DQAACw0B7QfALAAAAHdJREFUOE/tlNEJwCAMBbNZ3aTdRDdzJEdI84z5K6Uh6Z8HAaN4qMgjg5mLVJca
+        DAAACwwBP0AiyAAAAHdJREFUOE/tlNEJwCAMBbNZ3aTdRDdzJEdI84z5K6Uh6Z8HAaN4qMgjg5mLVJca
         Uh6w51waRSbaXIrRTHZpn0KBEEfOokOYycgW8hYq+E1f6on9hnF+EXrj6hUI08MBwZqFBq0MqvYh6pQZ
         MoGg9V4f7489h1qIbovS4qFatq4bAAAAAElFTkSuQmCC
 </value>
@@ -1775,7 +1775,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;dark_bg.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>2</value>
   </data>
   <data name="version_label.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1787,13 +1787,13 @@
     <value>50, 520</value>
   </data>
   <data name="version_label.Size" type="System.Drawing.Size, System.Drawing">
-    <value>217, 16</value>
+    <value>221, 16</value>
   </data>
   <data name="version_label.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
   </data>
   <data name="version_label.Text" xml:space="preserve">
-    <value>roadmap v1.1.0 - created by juicebct</value>
+    <value>roadmap v1.2.0. - created by juicebct</value>
   </data>
   <data name="&gt;&gt;version_label.Name" xml:space="preserve">
     <value>version_label</value>
@@ -1814,7 +1814,7 @@
     <value>Arial, 9.75pt</value>
   </data>
   <data name="line_label.Location" type="System.Drawing.Point, System.Drawing">
-    <value>750, 520</value>
+    <value>757, 20</value>
   </data>
   <data name="line_label.Size" type="System.Drawing.Size, System.Drawing">
     <value>10, 16</value>
@@ -1832,10 +1832,10 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;line_label.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>light_bg</value>
   </data>
   <data name="&gt;&gt;line_label.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="sourceCode_btn.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1844,7 +1844,7 @@
     <value>Arial, 9.75pt</value>
   </data>
   <data name="sourceCode_btn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>670, 20</value>
+    <value>671, 20</value>
   </data>
   <data name="sourceCode_btn.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 16</value>
@@ -1865,40 +1865,106 @@
     <value>light_bg</value>
   </data>
   <data name="&gt;&gt;sourceCode_btn.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
-  <data name="about_btn.AutoSize" type="System.Boolean, mscorlib">
+  <data name="dev_btn.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="about_btn.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="dev_btn.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 9.75pt</value>
   </data>
-  <data name="about_btn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>760, 520</value>
+  <data name="dev_btn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>773, 20</value>
   </data>
-  <data name="about_btn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 16</value>
+  <data name="dev_btn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>28, 16</value>
   </data>
-  <data name="about_btn.TabIndex" type="System.Int32, mscorlib">
+  <data name="dev_btn.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
   </data>
-  <data name="about_btn.Text" xml:space="preserve">
-    <value>About</value>
+  <data name="dev_btn.Text" xml:space="preserve">
+    <value>Dev</value>
   </data>
-  <data name="&gt;&gt;about_btn.Name" xml:space="preserve">
-    <value>about_btn</value>
+  <data name="&gt;&gt;dev_btn.Name" xml:space="preserve">
+    <value>dev_btn</value>
   </data>
-  <data name="&gt;&gt;about_btn.Type" xml:space="preserve">
+  <data name="&gt;&gt;dev_btn.Type" xml:space="preserve">
     <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;about_btn.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="&gt;&gt;dev_btn.Parent" xml:space="preserve">
+    <value>light_bg</value>
   </data>
-  <data name="&gt;&gt;about_btn.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="&gt;&gt;dev_btn.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <data name="light_bg.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom</value>
+  </data>
+  <data name="docs_btn.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="docs_btn.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 9.75pt</value>
+  </data>
+  <data name="docs_btn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="docs_btn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>612, 20</value>
+  </data>
+  <data name="docs_btn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>37, 16</value>
+  </data>
+  <data name="docs_btn.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="docs_btn.Text" xml:space="preserve">
+    <value>Docs</value>
+  </data>
+  <data name="&gt;&gt;docs_btn.Name" xml:space="preserve">
+    <value>docs_btn</value>
+  </data>
+  <data name="&gt;&gt;docs_btn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;docs_btn.Parent" xml:space="preserve">
+    <value>light_bg</value>
+  </data>
+  <data name="&gt;&gt;docs_btn.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 9.75pt</value>
+  </data>
+  <data name="label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>655, 20</value>
+  </data>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>10, 16</value>
+  </data>
+  <data name="label1.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>|</value>
+  </data>
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+    <value>label1</value>
+  </data>
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+    <value>light_bg</value>
+  </data>
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="light_bg.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 500</value>
@@ -1919,7 +1985,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;light_bg.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>1</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -2031,7 +2097,7 @@
     <value>CenterScreen</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>RoadMap Project v1.1.0</value>
+    <value>RoadMap Project v1.2.0</value>
   </data>
   <data name="&gt;&gt;backgroundWorker1.Name" xml:space="preserve">
     <value>backgroundWorker1</value>

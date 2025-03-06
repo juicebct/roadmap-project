@@ -61,12 +61,12 @@ namespace RoadMap {
 		System::Windows::Forms::TextBox^ description_textbox;
 		System::Windows::Forms::TextBox^ topic_textbox;
 		System::Windows::Forms::TextBox^ subtopic_textbox;
+		System::Windows::Forms::Button^ minimize_btn;
+		System::Windows::Forms::Label^ sectionnumber_label;
 
 
 		int TopicCount = 0;
-	private: System::Windows::Forms::Button^ minimize_btn;
-	private: System::Windows::Forms::Label^ sectionnumber_label;
-		   bool dragging = false;
+		bool dragging = false;
 
 
 	protected:
@@ -423,8 +423,8 @@ namespace RoadMap {
 			this->subtopic_textbox->ScrollBars = System::Windows::Forms::ScrollBars::Vertical;
 			this->subtopic_textbox->Size = System::Drawing::Size(500, 70);
 			this->subtopic_textbox->TabIndex = 25;
-			this->subtopic_textbox->Text = L"#Enter subtopics names. Use \";\" (semicolon) to separate suptopics.\r\n\r\nThis is exa"
-				L"mple row. To start creating your RoadMap, please use \"ADD NEW ROW\" button.";
+			this->subtopic_textbox->Text = L"#Enter subtopics names. Use \";\" (semicolon) to separate suptopics.\r\n\r\nThis is an "
+				L"example row. To start creating your RoadMap, please use \"ADD NEW ROW\" button.";
 			// 
 			// close_btn
 			// 
@@ -510,7 +510,7 @@ namespace RoadMap {
 			this->MinimizeBox = false;
 			this->Name = L"editwindow";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
-			this->Text = L"RoadMap - Edit existing RoadMap";
+			this->Text = L"RoadMap Project - Roadmap editor";
 			this->light_bg->ResumeLayout(false);
 			this->light_bg->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->logo))->EndInit();
@@ -573,10 +573,6 @@ namespace RoadMap {
 		// Add new row button
 
 		System::Void addnew_btn_Click(System::Object^ sender, System::EventArgs^ e) {
-			if (TopicCount >= 15) {
-				MessageBox::Show("Maximum 15 Topics allowed.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
-				return;
-			}
 
 			TextBox^ newtopic_textbox = gcnew TextBox();
 			TextBox^ newsubtopic_textbox = gcnew TextBox();
@@ -644,9 +640,9 @@ namespace RoadMap {
 			newsubtopic_textbox->ForeColor = System::Drawing::Color::Black;
 			newdescription_textbox->ForeColor = System::Drawing::Color::Black;
 
-			newtopic_textbox->MaxLength = 40;
-			newsubtopic_textbox->MaxLength = 1500;
-			newdescription_textbox->MaxLength = 150;
+			newtopic_textbox->MaxLength = 60;
+			newsubtopic_textbox->MaxLength = 3000;
+			newdescription_textbox->MaxLength = 500;
 
 			newsubtopic_textbox->Multiline = true;
 			newsubtopic_textbox->ScrollBars = System::Windows::Forms::ScrollBars::Vertical;
@@ -670,45 +666,12 @@ namespace RoadMap {
 		// Save button
 
 		System::Void save_btn_Click(System::Object^ sender, System::EventArgs^ e) {
-			if (name_textbox->Text->Length > 40 || name_textbox->Text->Length == 0) {
-				MessageBox::Show("Error occurred while saving the Roadmap: Roadmap name can be up to 40 characters long and cannot be empty.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
-				return;
-			}
-			if (author_textbox->Text->Length > 45 || author_textbox->Text->Length == 0) {
-				MessageBox::Show("Error occurred while saving the Roadmap: Author name can be up to 45 characters long and cannot be empty.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
-				return;
-			}
 
 			for (int i = 0; i < textBoxes->Count; i += 3) {
 				String^ subtopicText = textBoxes[i + 1]->Text->Trim();
 				String^ descriptionText = textBoxes[i + 2]->Text->Trim();
 
 				int subtopicCount = subtopicText->Split(gcnew array<wchar_t>{';'}, StringSplitOptions::RemoveEmptyEntries)->Length;
-
-				if (descriptionText->Length > 0 && subtopicCount < 4) {
-					MessageBox::Show("Error occurred while saving the Roadmap: Each row must have at least 4 subtopics if a description is provided. Please add more subtopics before saving (Section number: " + (i / 3 + 1).ToString() + ").", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
-					return;
-				}
-				String^ TopicText = textBoxes[i]->Text->Trim();
-				if (TopicText->Length > 40 || TopicText->Length == 0) {
-					MessageBox::Show("Error occurred while saving the Roadmap: Topic name can be up to 40 characters long and cannot be empty (Section number: " + (i / 3 + 1).ToString() + ").", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
-					return;
-				}
-				if (descriptionText->Length > 150) {
-					MessageBox::Show("Error occurred while saving the Roadmap: Description can be up to 150 characters long (Section number: " + (i / 3 + 1).ToString() + ").", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
-					return;
-				}
-				if (String::IsNullOrWhiteSpace(subtopicText)) {
-					MessageBox::Show("Error occurred while saving the Roadmap: Subtopic cannot be empty in section (Section number: " + (i / 3 + 1).ToString() + ").", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
-					return;
-				}
-				int commaIndex = subtopicText->IndexOf(";");
-				if (commaIndex >= 0) {
-					if (commaIndex > 100) {
-						MessageBox::Show("Error occurred while saving the Roadmap: You can enter only 100 symbols before semicolon in subtopics (Section number: " + (i / 3 + 1).ToString() + ". Number of symbols now: " + commaIndex + ").", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
-						return;
-					}
-				}
 			}
 
 			System::Xml::XmlDocument^ xmlDoc = gcnew System::Xml::XmlDocument();
